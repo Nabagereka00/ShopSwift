@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<section class="featured">
+    <h1>Your Shopping Cart</h1>
+
+    {% if products %}
+        {% for item in products %}
+        <div class="cart-item" style="display:flex; gap:20px; margin-bottom:1px solid #444; padding-bottom:20px;">
+            <img src="{{ item.product.image.url }}" width="120">
+            <div>
+                <h3>{{ item.product.name }}</h3>
+                <p>{{ item.product.description }}</p>
+                <div style="display:flex; align-items:center; gap:10px; margin:10px 0;">
+                    <span>Qty:</span>
+                    <a href="/cart/update/{{ item.product.id }}/decrease/" style="padding:5px 12px; border:1px solid #fff; text-decoration:none; color:#fff;">-</a>
+                    <span>{{ item.quantity }}</span>
+                    <a href="/cart/update/{{item.product.id }}/increase/" style="padding:5px 12px; border:1px solid #fff; text-decoration:none; color:#fff;">+</a>
+                    
+            
+                    
+                    
+            </div>
+                <p>Price: UGX {{ item.product.price|floatformat:0|intcomma }} </p>
+                <p><strong> Subtotal: UGX {{ item.total|floatformat:0|intcomma }}</strong></p>
+            </div>
+
+        <a href="/cart/remove/{{ item.product.id }}/" style="color: red;">Remove</a>
+
+        </div>
+        {% endfor %}
+
+        <h2>Total: UGX {{ total|floatformat:0|intcomma }}</h2>
+        <a href="{% url 'checkout' %}" class="btn">Checkout</a>
+
+        {% else %}
+            <p> Your cart is empty</p>
+        {% endif %}
+</section>
+{% endblock %}

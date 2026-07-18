@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static  humanize %}
+{% block content %}
+
+
+
+
+
+
+<section class="hero">
+    <img src="{% static 'images/dia.jpg' %}">
+
+
+<div class="overlay" style="background: transparent; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); padding: 0;">
+    <h1 style="background: transparent; color: #fff; font-size: 48px;  margin: 0px;">
+        Elegant Jewelry
+    </h1>
+
+
+    <p style="background: transparent; color: #fff; font-size: 18px;  margin: 10px 0 30px 0;">
+        Luxury made for everyday beauty
+    </p>
+
+
+<a href="{% url 'products' %}" style="background: #D4AF77; color: #111; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;"
+onmouseover="this.style.background='#B8860B'"
+onmouseout="this.style.background='#D4AF37'">Shop Now </a>
+
+</a>
+
+</div>
+
+</section>
+
+
+<section class="featured">
+<h2>Best Sellers</h2>
+<div class="products">
+
+{% for product in products %}
+    <div class="card">
+        {% if product.image %}
+            <img src="{{product.image.url }}">
+        {% endif %}
+        <h3>{{ product.name  }}</h3>
+        <p><strong>UGX {{ product.price| floatformat:0|intcomma }}</strong></p>
+        <p> {{ product.description }}</p>
+        <a href="{% url 'add_to_cart' product.id %}" class="btn-small">Add to Cart</a>
+    
+    </div>
+{% empty %} 
+    <p>No products yet. Add some in Admin!</p>
+{% endfor %}
+{% endblock %}
+
+
+</div>
+</section>
+
+
+
+
+

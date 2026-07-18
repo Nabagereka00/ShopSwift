@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load static humanize %}
+{% block content %}
+<section class="featured">
+    <h2>Luxury Collection</h2>
+    <div class="products">
+        {% for product in products %}
+        <div class="card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+            <img src="{% static 'images/default.jpg' %}" alt="No image">
+            {% endif %}
+             
+            <h3>{{ product.name }}</h3>
+             <p class="price">UGX
+                {{ product.price|floatformat:0|intcomma }}
+             </p>
+             <p>{{ product.description|truncatewords:15 }}</p>
+
+             <a href="{% url 'add_to_cart' product.id %}" class="card-button">Add to cart</a>
+
+
+             
+        </div>
+        {% empty %}
+        <p style="text-align:center;">No products in database yet. Add them in Admin!</p>
+
+        {% endfor %}
+    </div>
+    </section>
+    {% endblock %}
+

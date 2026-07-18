@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <meta charset="UTF-8">
+    <title>ShopSwift</title>
+    <style>
+
+        body { background: #000;
+             color: #fff;
+             font-family: Arial;
+            margin: 0;}
+
+        nav { 
+            background: #000;
+            padding: 15px;
+            display: flex;
+            padding: 15px; 
+            gap: 20px}
+        
+        nav a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+         }
+
+        .btn, .btn-small {
+            background: #FFD700;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .featured {
+            padding: 40px;
+        }
+
+        .hero h1 {
+            background: transparent;
+            color: #fff;
+            font-size: 48px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: #111;">
+    <div class="logo" style="color: #D4AF37; font-size: 24px; font-weight: bold;">
+        ShopSwift
+    </div>
+    <ul style="list-style: none; display: flex; gap: 30px; margin: 0;">
+        <li><a href="{% url 'home' %}" style="color: #D4AF37; text-decoration: none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='D4AF37'">Home</a></li>
+        <li><a href="{% url 'products' %}" style="color: #D4AF37; text-decoration: none;"> Products</a></li>
+        <li><a href="{% url 'cart' %}" style="color: #D4AF37; text-decoration: none;">
+            cart (<span id="count">{{ request.session.cart|length }}</span>)
+        </a></li>
+    </ul>
+</nav>
+        
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

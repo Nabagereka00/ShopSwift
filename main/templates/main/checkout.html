@@ -1,0 +1,78 @@
+{% extends 'main/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<div style="max-width:600px; margin:20px auto;">
+    <h1>Checkout</h1>
+
+    {% if products %}
+        <h2>order summary</h2>
+        {% for item in products %}
+            <div style="border-bottom:1px solid #ddd; padding:10px 0;">
+                
+<p><strong>{{ item.product.name }}</strong></p>
+<p>Quantity:{{ item.quantity }}</p>
+<p>Subtotal: UGX{{ item.total|floatformat:0|intcomma }}</p>
+
+            </div>
+        {% endfor %}
+        <h3 style="margin-top:20px;">Total: UGX {{ total|floatformat:0|intcomma  }}</h3>
+        
+        <form method="post" id="checkout-form">
+            {% if messages %}
+                {% for message in messages %}
+                <p style="color:red; background:#ffe0e0; padding:10px; border-radius:5px; margin-bottom:15px">
+                    {{ message }}
+                </p>
+                {% endfor %}
+            {% endif %}
+            
+            {% csrf_token %}
+            <h3>Delivery Details</h3>
+            <input type="text" name="name" placeholder="Your Full Name" required style="width:100px; padding:8px; margin:5px 0;"><br>
+            <input type="text" name="phone" placeholder="Phone Number" required style="width:100px; padding:8px; margin:5px 0;"><br>
+            <textarea name="address" placeholder="Delivery Address" required style="width:100px; padding:8px; margin:5px 0; height:80px;"></textarea><br>
+            <button type="button" id="send-otp-btn" style="padding:10px 20px; background:#333; color:white; border:none; width:100%">
+                send OTP to phone
+            </button>
+
+            <div id="otp-section" style="display:none; margin-top:15px;">
+                <p>We sent a 6-digit code . Enter it below:</p>
+                <input type="text" name="otp" placeholder="Enter 6-digit OTP" maxlenght="6" style="width:100%; padding:10px; margin:5px 0;">
+                <button type="submit" style="padding:10px 20px; background:green; color:white; border:none; width:100%">
+                    confirm Order
+                </button>
+
+            </div>
+
+        </form>
+
+        {% else %}
+            <p>Your cart is empty</p>
+        {% endif %}
+
+</div>
+
+<script>
+    document.getElementById('send-otp-btn').onclick = function() {
+        let phone = document.querySelector('input[name="phone"]').value;
+        if(phone ==""){
+            alert("please enter your phone number first");
+            return;
+        }
+        alert("fake OTP: 123456. sent to " +phone);
+        // simple fake OTP for now. 
+
+        document.getElementById('otp-section').style.display = 'flex';
+        document.getElementById('send-otp-btn').style.flexDirection = 'column';
+        document.getElementById('otp-section').style.gap = '10px';
+        
+        // Hide button
+        document.getElementById('sent-otp-btn').style.display = 'none';
+    }
+</script>
+
+{% endblock %}
+
+
+

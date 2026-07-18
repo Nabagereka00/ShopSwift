@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<div style="text-align: center; margin-top:50px;">
+    <h1>Order Placed Successfully!</h1>
+    <p>Thank you {{ name }} for your order.</p>
+    <p>Total: UGX {{ total|floatformat:0|intcomma }}</p>
+    <p>We will call you on to confirm delivery.</p>
+    <br>
+    <a href="{% url 'home' %}">Continue Shopping</a>
+</div>
+{% endblock %}
