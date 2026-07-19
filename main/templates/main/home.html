@@ -40,11 +40,11 @@ onmouseout="this.style.background='#D4AF37'">Shop Now </a>
 {% for product in products %}
     <div class="card">
         {% if product.image %}
-            <img src="{{ product.image.url }}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
         {% endif %}
         <h3>{{ product.name  }}</h3>
         <p><strong>UGX {{ product.price| floatformat:0|intcomma }}</strong></p>
-        <p> {{ product.description }}</p>
+        <p><strong> {{ product.description }}</strong></p>
         <a href="{% url 'add_to_cart' product.id %}" class="btn-small">Add to Cart</a>
     
     </div>
