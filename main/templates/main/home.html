@@ -38,26 +38,9 @@ onmouseout="this.style.background='#D4AF37'">Shop Now </a>
 <div class="products">
 
 {% for product in products %}
-    <div class="product-card">
-        {% if product.name == "GOLD NECKLACE" %}
-            <img src="{% static 'images/goldnecklace.jpg' %}" alt="{{ product.name }}">
-        
-        {% elif product.name =="DIAMOND BRACELET" %}
-            <img src="{% static 'images/diamond bracelet.jpg' %}" alt="{{ product.name }}">
-
-        {% elif product.name =="DIAMOND EARRINGS" %}
-           <img src="{% static 'images/diamond earringa.jpg' %}" alt="{{ product.name }}">
-
-        {% elif product.name =="BANGLE" %}
-            <img src="{% static 'images/timeless-bangle.jpg' %}" alt="{{ product.name }}">
-
-         {% elif product.name =="GOLD RING" %}
-            <img src="{% static 'images/gold ring.jpg' %}" alt="{{ product.name }}">
-
-        {% else %}
-            <img src="{% static 'images/hero.jpg' %}" alt="{{ product.name }}">
-
-        
+    <div class="card">
+        {% for product.image %}
+            <img src="{{ product.image.url }}">
         {% endif %}
         <h3>{{ product.name  }}</h3>
         <p>UGX {{ product.price| floatformat:0|intcomma }}</p>
