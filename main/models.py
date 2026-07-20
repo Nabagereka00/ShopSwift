@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
+    image = CloudinaryField('image' ,blank=True, null=True)
     stock = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=timezone.now)
 
