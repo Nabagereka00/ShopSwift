@@ -137,8 +137,8 @@ WHITENOISE_USE_FINDER =True
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'lsyiexv1',
-    'API_KEY': '976223579741',
-    'API_SECRET': '2Zchcn92j_5-GPh99ZJjFeFdgvQ',
+    'CLOUD_NAME':os.environ.get('lsyiexv1'),
+    'API_KEY': os.environ.get('976223579741'),
+    'API_SECRET': os.environ.get('2Zchcn92j_5-GPh99ZJjFeFdgvQ'),
 
 }
