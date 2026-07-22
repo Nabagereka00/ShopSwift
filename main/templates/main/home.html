@@ -41,7 +41,7 @@ onmouseout="this.style.background='#D4AF37'">Shop Now </a>
 {% for product in products %}
     <div class="card">
         {% if product.image %}
-            <img src="{{ cloudinary product.image.url }}" alt="{{ product.name }}">
+            <img src="{{ cloudinary product.image }}" alt="{{ product.name }}">
         {% endif %}
         <h3>{{ product.name  }}</h3>
         <p><strong>UGX {{ product.price| floatformat:0|intcomma }}</strong></p>
