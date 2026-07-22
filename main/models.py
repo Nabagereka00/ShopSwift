@@ -6,7 +6,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = CloudinaryField('image' ,blank=True, null=True)
+    image = CloudinaryField('image' ,folder='products', null=True, blank=True)
     stock = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=timezone.now)
 
